@@ -1,0 +1,46 @@
+<title> Make Appointment | FreeDoctor</title>
+<h1 class="text-center pt-2">Make Appointment</h1>
+<div class="container-fluid bg-danger">
+    <h6 class="text-center text-white"> Nb: Please make your request in the "Message" field and fill in the appointment date you have chosen in the "Date" field | Consult the <%= link_to 'F.A.Q', home_help_path, class: "btn btn-sm btn-info m-2 text-white" %>  for more information.</h6>
+</div>
+<div class="container pt-5">
+    <div class="row">
+      <div class="col-3">
+      
+      </div>
+      <div class="col-6">
+        <%= form_with(model: @appointment, local: true, url: appointment_doctor_path) do |form| %>
+          <% if @appointment.errors.any? %>
+            <div id="error_explanation">
+              <h2><%= pluralize(@appointment.errors.count, "error") %> prohibited this appointment from being saved:</h2>
+        
+              <ul>
+              <% @appointment.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+              </ul>
+            </div>
+          <% end %>
+             
+          <div class="mt-2">
+            <%= form.label :message, class: "form-label" %>
+            <%= form.text_area :message, class: "form-control" %>
+          </div><br>
+
+          <div class="mt-2">
+            <%= form.label :date, class: "form-label" %>
+            <%= form.datetime_field :date, id: "date" , order: [:day, :month, :year, :hour, :minute], class: 'form-control', use_month_numbers: false%>
+          </div>
+        
+          <div class="mt-2">
+            <%= form.submit class: "btn btn-success" %>
+          </div><br><br><br>
+        <% end %>
+      
+      </div>
+      <div class="col-3">
+      
+      </div>
+    </div>
+</div
+

@@ -1,0 +1,24 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.section-bg{
+    height: 650px;
+    background-color: black; 
+    background-image: image-url("bg.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+ }
+ .mynav{
+     background-color: rgb(14, 212, 179);
+    
+    
+ }
+ .text-first{
+    padding-top: 225px;
+ }
+
+ a:hover{
+    background-color: #00000000;
+ }
+

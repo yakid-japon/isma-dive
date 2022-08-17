@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render 'application/favicon' %>
+   <% begin %>
+  <%= stylesheet_link_tag 'application', 'data-turbolinks-track' => 'reload', media: 'all' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => 'reload' %>
+<% rescue %>
+  <script>
+    window.location.replace "#{user_session_url()}"
+  </script>
+<% end %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.6.1/font/bootstrap-icons.css">
+    <script type="text/javascript" src="https://cdn.weglot.com/weglot.min.js"></script>
+<script>
+    Weglot.initialize({
+        api_key: 'wg_f13bde68bf65e345c3f6230b962cb6514'
+    });
+</script>
+  </head>
+  <style>
+       a:hover{
+    background-color: #00000000;
+      }
+  </style>
+
+  <body>
+      <% if flash.present? %>
+        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+          
+              <% flash.each do |key, value| %>
+                <%= content_tag(:div, value, class: "#{key}") %>
+            <% end %>
+          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+      <% end %>
+        
+      
+      <% if user_signed_in? %>
+              <nav class="navbar navbar-expand-lg navbar-light mynav"  >
+            <div class="container-fluid" id="">
+              
+                <%= image_tag "/logo.jpg", width: "30px", class:"navbar-brand text-light logo" %> FreeDoctor
+             
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              
+              <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+              
+                <li class="nav-item">
+                  <%= link_to 'Home', home_index_path, class: "nav-link text-white pe-4"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Announces', annonces_path, class: "nav-link text-white"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Doctors', doctors_path, class: "nav-link text-white"%>
+                </li>
+                <li class="nav-item">
+                  <%= link_to 'Help', home_help_path, class: "nav-link text-white"%>
+                </li>
+              </ul>
+              <div class="d-flex  ">
+              <%= link_to "Profile", profile_index_path, class: " me-2 btn btn-success account text-white"%> 
+                      <%= link_to "Logout", destroy_user_session_path, method: :delete, class:"btn btn-light text-success account" %> 
+              </div>
+            </div>
+          </div>
+        </nav>
+         
+      <% else%> 
+              <nav class="navbar navbar-expand-lg navbar-light mynav"  >
+                <div class="container-fluid" id="">
+                     <%= image_tag "/logo.jpg", width: "30px", class:"navbar-brand text-light logo" %> FreeDoctor
+              <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0" >
+                
+                  <li class="nav-item">
+                  <%= link_to 'Home', home_index_path, class: "nav-link text-white pe-4"%>
+                    
+                  </li>
+                  <li class="nav-item">
+                    <%= link_to 'Announces', annonces_path, class: "nav-link text-white"%>
+                  </li>
+                  <li class="nav-item">
+                  <%= link_to 'Doctors', doctors_path, class: "nav-link text-white"%>
+                  </li>
+                  <li class="nav-item">
+                  <%= link_to 'Help', home_help_path, class: "nav-link text-white"%>
+                </li>
+                </ul>
+                <div class="d-flex ">
+                
+                  <%= link_to 'Sign up', new_user_registration_path, class: "me-2 btn btn-light text-success account"%>
+                  <%= link_to 'Log in', new_user_session_path, class: "me-2 btn btn-success account text-white"%>
+                  
+                </div>
+              </div>
+            </div>
+          </nav>
+         
+      <% end %>
+        <%= render 'partials/foot' %>
+        <script>
+            Weglot.initialize({
+                api_key: 'wg_f13bde68bf65e345c3f6230b962cb6514'
+            });
+        </script>
+      <%= yield %>
+     
+      
+  </body>
+</html>

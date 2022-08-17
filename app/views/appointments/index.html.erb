@@ -1,0 +1,55 @@
+<title>  Appointments | FreeDoctor</title>
+
+
+<div class="container-fluid pt-3">
+  <div class="row">
+      <div class="col-2">
+        
+        
+      </div>
+      <div class="col-8">
+      <h3 class="text-center"> <i class="bi bi-cursor"></i> My Appointments Requests</h3><br>
+                <table class="table table-success table-striped table-hover">
+              
+                  <tr>
+                    <th>Patient Name</th>
+                    <th>Doctor Name</th>
+                    <th>Appointment Demand</th>
+                    <th>Appointment Date</th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                  </tr>
+                
+              
+                
+                  <% @appointments.each do |appointment| %>
+                    <tr>
+                      <td><%= appointment.user.name %></td>
+                      <td><%= appointment.doctor.user.name %></td>
+                        <td><%= appointment.message %></td>
+                         <td><%= appointment.date.strftime("%d %b %Y à %H:%M") if appointment.date  %></td>
+                        <td><%= link_to  appointment, title: "Show" do %>  <i class="bi bi-eye"></i>
+                          <% end %> </td>
+                        <td><%= link_to edit_appointment_path(appointment), title: "Edit" do %> <i class="bi bi-pencil" style="color: green;"></i>
+                          <% end %> </td>
+                        <td><%= link_to appointment, title: "Supprimer", method: :delete, data: { confirm: 'Are you sure?' } do %> <i class="bi bi-trash" style="color: red;"></i>
+                          <% end %> </td>
+                    </tr>
+                  <% end %>
+                
+              </table>
+              
+              <br>
+              
+              <%= link_to 'New Appointment', new_appointment_path %>
+              <br><br><br><br><br><br>
+      </div>
+      <div class="col-2"></div>
+    </div>
+</div>
+
+
+
+
+

@@ -1,0 +1,37 @@
+<title>Annonce N° <%= @annonce.id %>| FreeDoctor</title>
+
+<div class="row">
+  <div class="col-3 "></div>
+  <div class="col-lg-6 col-sm-12">
+    <div class="border rounded-bottom border-2 border-success m-4">
+      <div class="container-fluid bg-success">
+        <h6 class="text-center text-white">Publied by <b> Dr <%= @annonce.user.name %> </b>, <%= @annonce.created_at %></h6>
+      </div>
+      <div class="m-5">
+          <h5 class="card-title">  <%= @annonce.title %> </h5>
+          <hr>
+          <p class="card-text">  <%= @annonce.content %> </p><br>
+      
+          <div style="text-align: center;">
+            <%= image_tag(@annonce.image.url,  width: "400px") if @annonce.image && @annonce.image.url  %><br>
+          </div><br
+          <p class="card-text"><small class="text-muted">Last updated at <%= @annonce.updated_at %> </small></p> 
+      </div>
+    </div>
+    
+    <div id="comments_area" class="pt-5 ">
+      <h5 class="text-center"> <i class="bi bi-people-fill"></i> Comments</h5><br>
+      <%= render partial: 'comments/index', locals: { comments: @comments, annonce: @annonce } %>
+      
+    </div>
+    <div class="col-sm-6 ps-5">
+      <%= render partial: 'comments/form', locals: { comment: @comment, annonce: @annonce } %>
+    </div>
+  </div>
+  <div class="col-3"></div>
+</div>
+
+
+  
+
+<br><br><br><br><br><br>

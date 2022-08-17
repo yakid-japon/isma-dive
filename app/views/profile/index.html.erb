@@ -1,0 +1,109 @@
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+  
+  <title>User's Profile Page | FreeDoctor</title>
+
+</head>
+    
+
+  <div class="row">
+    <div class="col-4 col-sm-6">
+      <%= render 'partials/sidebar' %>
+    </div>
+    <div class="col-8 col-sm-4 pt-2">
+          
+       <div class="d-flex justify-content-between row ">
+          <% if current_user.establishment %>
+            <% if @annonces.present? %>
+                <h2 class="text-center"> My posts </h2>
+              <% @annonces.each do |annonce| %>
+                <div class="card mb-3" style="max-width: 540px;">
+                  <div class="row g-0">
+                    <div class="col-md-4">
+                    <%= image_tag(annonce.image.url, class: "img-fluid rounded-start") if annonce.image && annonce.image.url  %>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="card-body">
+                        <h4 class="card-title"> <%= annonce.title %> </h4>
+                        <p class="card-text">By <b> Dr <%= annonce.user.name  %> </b> </p>
+
+                        <%= link_to 'See more', annonce, class: "btn btn-outline-primary btn-sm" %>
+                        
+                          <%= link_to 'Edit', edit_annonce_path(annonce), class: "btn btn-outline-success btn-sm" %>
+                          <%= link_to 'Delete', annonce, method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-outline-danger btn-sm" %>
+                       
+                        <br>
+                        <br>
+                        <p class="card-text"><small class="text-muted">Last updated <%= annonce.created_at%> </small></p>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              <% end %> 
+            <% else %>
+                <h2 class="text-center"> No posts </h2>
+            <% end %>
+          <% else %>
+              <% if @appointments.present?%>
+                <h3>My Appointment Requests</h3>
+                    <table class="table table-success table-striped table-hover">
+                  
+                      <tr>
+                        <th>Patient Name</th>
+                        <th>Doctor Name</th>
+                        <th>Appointment Demand</th>
+                         <th>Appointment Date</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                      </tr>
+                    
+                  
+                    
+                      <% @appointments.each do |appointment| %>
+                        <tr>
+                          <td><%= appointment.user.name %></td>
+                          <td><%= appointment.doctor.user.name %></td>
+                            <td><%= appointment.message %></td>
+                            <td><%= appointment.date.strftime("%d %b %Y à %H:%M") if appointment.date  %></td>
+                            <td><%= link_to  appointment, title: "Show" do %>  <i class="bi bi-eye"></i>
+                              <% end %> </td>
+                            <td><%= link_to edit_appointment_path(appointment), title: "Edit" do %> <i class="bi bi-pencil" style="color: green;"></i>
+                              <% end %> </td>
+                            <td><%= link_to appointment, title: "Supprimer", method: :delete, data: { confirm: 'Are you sure?' } do %> <i class="bi bi-trash" style="color: red;"></i>
+                              <% end %> </td>
+                        </tr>
+                      <% end %>
+                    
+                  </table>
+              <% else %>
+                  <h3>No Appointment Demands</h3>
+              <% end %>
+          <% end %>
+
+      </div>  
+
+
+    </div>
+    
+  </div>
+
+
+
+
+
+
+
+
+
