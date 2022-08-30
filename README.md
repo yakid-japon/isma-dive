@@ -18,8 +18,8 @@
 ## Execution Procedure
 
 ```
-$ git clone git@github.com:fredagbona/original-application-diver.git
-$ cd meetdoctor
+$ git clone git@github.com:yakid-japon/isma-dive.git
+$ cd isma-dive
 $ bundle install
 $ rails db:create
 $ rails db:migrate
