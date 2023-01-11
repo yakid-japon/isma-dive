@@ -81,5 +81,3 @@ test:
 production:
   <<: *default
   database: meetdoctor_production
-  username: meetdoctor
-  password: <%= ENV['MEETDOCTOR_DATABASE_PASSWORD'] %>
